@@ -4,7 +4,7 @@ from config import *
 from sprites import Sprite, Plataforma_Movel, Botao
 from jogador import Jogador
 from groups import AllSprites
-#from Inimigo import Enemy
+# from Inimigo import Enemy
 
 
 class Nivel:
@@ -18,10 +18,10 @@ class Nivel:
         self.setup(tmx_map)
 
     def setup(self, tmx_map):
-        #chao
+        # chao
         for x, y, surf in tmx_map.get_layer_by_name("Chao").tiles():
             Sprite((x * tamanho_bloco, y * tamanho_bloco), surf, (self.all_sprites, self.collision_sprites))
-        #objetos
+        # objetos
         for obj in tmx_map.get_layer_by_name("Player"):
             if obj.name == "Passaro":
                 self.player = Jogador((obj.x, obj.y), self.all_sprites, self.collision_sprites, self.semi_collision_sprites, pygame.K_d, pygame.K_a, pygame.K_s, pygame.K_w)
@@ -31,13 +31,13 @@ class Nivel:
         for obj in tmx_map.get_layer_by_name("Obstaculo"):
             if obj.name == "Botao":
                 self.botao = Botao((obj.x, obj.y), self.all_sprites, self.collision_sprites)
-        #Plataformas
+        # Plataformas
         for obj in tmx_map.get_layer_by_name("Plataformas"):
             if obj.name == "Local":
                 # horizontal
                 if obj.width > obj.height:
                     direcao_movi = "x"
-                    pos_inicial = (obj.x,obj.y + obj.height/2)
+                    pos_inicial = (obj.x, obj.y + obj.height/2)
                     pos_final = (obj.x + obj.width, obj.y + obj.height/2)
 
                 # vertical
@@ -46,17 +46,19 @@ class Nivel:
                     direcao_movi = "y"
                     pos_inicial = (obj.x + obj.width / 2, obj.y)
                     pos_final = (obj.x + obj.width / 2, obj.y + obj.height)
-                Vel = obj.properties["Vel"]
-                Plataforma_Movel((self.all_sprites, self.semi_collision_sprites), pos_inicial, pos_final, direcao_movi, Vel)
+                vel = obj.properties["Vel"]
+                Plataforma_Movel((self.all_sprites, self.semi_collision_sprites), pos_inicial, pos_final, direcao_movi, vel)
 
-        #for obj in tmx_map.get_layer_by_name("Inimigos"):
+        # for obj in tmx_map.get_layer_by_name("Inimigos"):
         #    if obj.name == "Enemy":
         #        player((obj.x, obj.y), self.all_sprites, self.enemy_collision_sprites)
-
-
 
     def run(self, dt):
         self.display_surface.fill("#72647d")
 
         self.all_sprites.update(dt)
-        self.all_sprites.draw(self.player.hitbox_rect.center)
+
+        x = ((self.player.hitbox_rect.x + self.player2.hitbox_rect.x)/2)
+        y = ((self.player.hitbox_rect.y + self.player2.hitbox_rect.y)/2)
+        center = [x, y]
+        self.all_sprites.draw(center)
