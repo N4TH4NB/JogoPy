@@ -4,9 +4,9 @@ from os.path import join
 
 
 class Jogador(pygame.sprite.Sprite):
-    def __init__(self, pos, groups, collision_sprites, semi_collision_sprites, right_key, left_key, down_key, jump_key):
+    def __init__(self, image, pos, groups, collision_sprites, semi_collision_sprites, right_key, left_key, down_key, jump_key, outro_jogador=None):
         super().__init__(groups)
-        self.image = pygame.image.load(join("chickenc.png"))
+        self.image = image
         # self.image = pygame.Surface((8, 8))  #16,16
         #  self.image.fill("pink")
         self.rect = self.image.get_frect(topleft=pos)
@@ -34,6 +34,7 @@ class Jogador(pygame.sprite.Sprite):
         self.left_key = left_key
         self.down_key = down_key
         self.jump_key = jump_key
+        self.outro_jogador = outro_jogador
 
     def input(self):
         keys = pygame.key.get_pressed()
@@ -66,9 +67,6 @@ class Jogador(pygame.sprite.Sprite):
             #  self.direction.y = -5
         #  print("cima")
 
-    def get_pos(self):
-        x = self.rect.x
-
     def move(self, dt):  # data time
         #   self.rect.topleft += self.direction * self.speed * dt
         self.hitbox_rect.x += self.direction.x * self.speed * dt
@@ -77,8 +75,7 @@ class Jogador(pygame.sprite.Sprite):
         #   if self.dash:
         #    self.direction.x = -200 if self.on_ground["left"] or self.on_ground["chao"] else 200
 
-        if not self.on_ground["chao"] and any((self.on_ground["left"], self.on_ground["right"])) and not self.timers[
-            "wall climb"].active:
+        if not self.on_ground["chao"] and any((self.on_ground["left"], self.on_ground["right"])) and not self.timers["wall climb"].active:
             if self.climb:
                 self.hitbox_rect.y -= 30 * dt
                 self.climb = False
@@ -136,11 +133,14 @@ class Jogador(pygame.sprite.Sprite):
         # print(self.direction.y)
 
     def die(self):
-        # esquerda_rect = pygame.Rect(self.rect.bottomleft, (self.rect.width, 2))
-        # self.on_ground["obstaculo"] = True if esquerda_rect.collidelist(collide_rects) >= 0 else False
         if self.hitbox_rect.x > 1280 or self.hitbox_rect.y > 720 or self.hitbox_rect.x < -5:
-            self.hitbox_rect.x = 100  # 445
-            self.hitbox_rect.y = 50  # 350
+            self.respawn()
+            self.outro_jogador.respawn()
+
+    def respawn(self):
+        self.hitbox_rect.x = 100  # 445
+        self.hitbox_rect.y = 50
+
 
     def pressed_botao(self):
         if self.pressed_botao():

@@ -6,7 +6,6 @@ class Sprite(pygame.sprite.Sprite):
         super().__init__(groups)
 
         self.image = surf
-        self.image.fill("white") #colocar como comentário -----------------------------------------------------------
         self.rect = self.image.get_frect(topleft=pos)
         self.old_rect = self.rect.copy()
 
