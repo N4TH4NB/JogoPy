@@ -11,7 +11,12 @@ class Game:
         pygame.init()
 
         # Criação da janela de jogo
-        self.surface = pygame.display.set_mode((largura, altura), pygame.DOUBLEBUF | pygame.SCALED)
+        self.surface = pygame.display.set_mode((largura, altura), pygame.SCALED | pygame.HIDDEN)
+
+        janela = pygame.Window.from_display_module()
+        janela.size = (largura_janela, altura_janela)
+        janela.position = pygame.WINDOWPOS_CENTERED
+        janela.show()
 
         pygame.display.set_caption(titulo)  # Título do jogo
         self.clock = pygame.time.Clock()
