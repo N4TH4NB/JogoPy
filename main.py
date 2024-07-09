@@ -1,7 +1,6 @@
 from os.path import join
 from sys import exit
 
-import pygame
 import time
 from pytmx.util_pygame import load_pygame
 

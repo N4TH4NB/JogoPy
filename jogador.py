@@ -95,11 +95,6 @@ class Jogador(pygame.sprite.Sprite):
                 self.doublejump += 3
                 self.timers["wall jump"].activate()
                 self.direction.y = self.jump_height
-                self.direction.x = 1 if self.on_ground["left"] else -1
-
-            # self.direction.x = 1 if self.on_ground["left"] or self.on_ground["right"] else -1
-
-            #    self.doublejump = 17
 
         self.jump = False
         self.collision("vertical")
