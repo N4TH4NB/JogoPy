@@ -1,9 +1,12 @@
+from os.path import join
+from sys import exit
+
+import pygame
+import time
+from pytmx.util_pygame import load_pygame
+
 from config import *
 from nivel import Nivel
-import pygame
-from sys import exit
-from os.path import join
-from pytmx.util_pygame import load_pygame
 
 
 class Game:
@@ -31,13 +34,17 @@ class Game:
         }
         self.current_stage = Nivel(self.tmx_maps[self.num_nivel], self.switch_stage)
 
+        self.tempo = time.time()
+
     def switch_stage(self, num_nivel):
         #  print(num_nivel)
         self.current_stage = Nivel(self.tmx_maps[num_nivel], self.switch_stage)
 
     def run(self):
         while True:
-            dt = self.clock.tick(60) / 1000
+            self.clock.tick(FPS)
+            dt = time.time() - self.tempo
+            self.tempo = time.time()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()

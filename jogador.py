@@ -75,11 +75,11 @@ class Jogador(pygame.sprite.Sprite):
 
             else:
                 self.direction.y = 0
-                self.hitbox_rect.y += self.gravity / 10 * dt
+                self.hitbox_rect.y += self.gravity / 10 * dt * FPS_Fisica
 
         else:
             self.direction.y += self.gravity / 2 * dt
-            self.hitbox_rect.y += self.direction.y
+            self.hitbox_rect.y += self.direction.y * dt * FPS_Fisica
             self.direction.y += self.gravity / 2 * dt
 
         if self.jump:
@@ -108,7 +108,7 @@ class Jogador(pygame.sprite.Sprite):
         # print(self.direction.y)
 
     def die(self):
-        if self.hitbox_rect.x > 3000 or self.hitbox_rect.y > 3000 or self.hitbox_rect.x < -5:
+        if self.hitbox_rect.x > 1000 or self.hitbox_rect.y > 1000 or self.hitbox_rect.x < -5:
             self.respawn()
             self.outro_jogador.respawn()
 
