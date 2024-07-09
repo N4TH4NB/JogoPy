@@ -60,5 +60,14 @@ class Botao(Sprite):
     def update(self):
         self.image.fill("pink")
 
+class Bandeira(Sprite):
+    def __init__(self, groups, surf, collision_sprites, num_nivel):
+        super().__init__(groups, surf, num_nivel)
+        surf = pygame.Surface((32, 32))
+        self.image = surf
+        self.image = surf
+        self.num_nivel = num_nivel
 
+    def update(self):
+        self.old_rect = self.rect.copy()
 

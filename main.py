@@ -5,6 +5,7 @@ from sys import exit
 from os.path import join
 from pytmx.util_pygame import load_pygame
 import math
+from random import choice
 
 
 class Game:
@@ -19,10 +20,19 @@ class Game:
         pygame.display.set_caption(titulo)  # Título do jogo
         self.clock = pygame.time.Clock()
 
+        self.num_nivel = 0
         # Carregar mapas
         self.tmx_maps = {
-            0: load_pygame(join("TiledLava.tmx"))}
-        self.current_stage = Nivel(self.tmx_maps[0])
+            0: load_pygame(join("tiled\\TiledLava.tmx")),
+            1: load_pygame(join("tiled\\TiledForest.tmx")),
+            2: load_pygame(join("tiled\\TiledSnow.tmx"))
+
+        }
+        self.current_stage = Nivel(self.tmx_maps[self.num_nivel], self.switch_stage, self.num_nivel)
+
+    def switch_stage(self, num_nivel):
+        #  print(num_nivel)
+        self.current_stage = Nivel(self.tmx_maps[num_nivel], self.switch_stage, self.num_nivel)
 
     def run(self):
         while True:
@@ -33,7 +43,7 @@ class Game:
                     exit()
 
             # Executar lógica do nível
-            self.current_stage.run(dt)
+            self.current_stage.run(dt, self.num_nivel)
 
             # Ampliar a superfície do jogo
             scaled_surface = pygame.transform.scale(self.surface, (self.largura_upscale, self.altura_upscale))
