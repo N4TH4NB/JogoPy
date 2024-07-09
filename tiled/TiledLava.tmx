@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="35" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="13">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="35" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="13">
  <tileset firstgid="1" source="tsx/Lava_Ground.tsx"/>
  <tileset firstgid="106" source="tsx/flag.tsx"/>
  <tileset firstgid="115" source="tsx/sign.tsx"/>
@@ -43,8 +43,8 @@
   </object>
  </objectgroup>
  <objectgroup id="3" name="Player">
-  <object id="3" name="Passaro" gid="5" x="103.311" y="77" width="16" height="16"/>
-  <object id="7" name="Player2" gid="3" x="122" y="75.5" width="16" height="16"/>
+  <object id="3" name="Passaro" gid="5" x="88.6444" y="79" width="16" height="16"/>
+  <object id="7" name="Player2" gid="3" x="118.333" y="79.1666" width="16" height="16"/>
  </objectgroup>
  <layer id="1" name="Chao" width="35" height="32">
   <data encoding="csv">

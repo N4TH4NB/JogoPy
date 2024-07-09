@@ -4,9 +4,10 @@ from os.path import join
 
 
 class Jogador(pygame.sprite.Sprite):
-    def __init__(self, image, pos, groups, collision_sprites, semi_collision_sprites, right_key, left_key, down_key, jump_key, outro_jogador=None):
+    def __init__(self, image, pos, groups, collision_sprites, semi_collision_sprites, right_key, left_key, down_key,
+                 jump_key, outro_jogador=None):
         super().__init__(groups)
-        self.image = image
+        self.image = image #image
         # self.image = pygame.Surface((8, 8))  #16,16
         #  self.image.fill("pink")
         self.rect = self.image.get_frect(topleft=pos)
@@ -15,12 +16,10 @@ class Jogador(pygame.sprite.Sprite):
         self.direction = vector()
         self.speed = 150
         self.gravity = 20
-        self.dash_size = 5
         self.doublejump_check = False
         self.doublejump = 1
         self.jump = False
         self.climb = False
-        self.dash = False
         # self.on_ground = False
         self.void = False
         self.jump_height = -4.5  # -15
@@ -60,10 +59,6 @@ class Jogador(pygame.sprite.Sprite):
         if keys[self.jump_key]:
             self.climb = True
 
-        # Dash
-        if keys[pygame.K_x]:
-            self.dash = True
-
             #  self.direction.y = -5
         #  print("cima")
 
@@ -72,10 +67,8 @@ class Jogador(pygame.sprite.Sprite):
         self.hitbox_rect.x += self.direction.x * self.speed * dt
         self.collision("horizontal")
 
-        #   if self.dash:
-        #    self.direction.x = -200 if self.on_ground["left"] or self.on_ground["chao"] else 200
-
-        if not self.on_ground["chao"] and any((self.on_ground["left"], self.on_ground["right"])) and not self.timers["wall climb"].active:
+        if not self.on_ground["chao"] and any((self.on_ground["left"], self.on_ground["right"])) and not self.timers[
+            "wall climb"].active:
             if self.climb:
                 self.hitbox_rect.y -= 30 * dt
                 self.climb = False
@@ -108,24 +101,6 @@ class Jogador(pygame.sprite.Sprite):
 
             #    self.doublejump = 17
 
-        if self.dash:
-            if self.on_ground["left"]:
-                self.hitbox_rect.x += self.dash_size * 3
-            elif self.on_ground["right"]:
-                self.hitbox_rect.x -= self.dash_size * 3.9
-
-            elif self.on_ground["chao"]:
-                if self.old_rect.left > self.hitbox_rect.x:
-                    self.hitbox_rect.x -= self.dash_size
-                if self.old_rect.left < self.hitbox_rect.x:
-                    self.hitbox_rect.x += self.dash_size
-            else:
-                if self.old_rect.left > self.hitbox_rect.x:
-                    self.hitbox_rect.x -= self.dash_size
-                if self.old_rect.left < self.hitbox_rect.x:
-                    self.hitbox_rect.x += self.dash_size
-
-        self.dash = False
         self.jump = False
         self.collision("vertical")
         self.semi_collision()
@@ -133,14 +108,13 @@ class Jogador(pygame.sprite.Sprite):
         # print(self.direction.y)
 
     def die(self):
-        if self.hitbox_rect.x > 1280 or self.hitbox_rect.y > 720 or self.hitbox_rect.x < -5:
+        if self.hitbox_rect.x > 3000 or self.hitbox_rect.y > 3000 or self.hitbox_rect.x < -5:
             self.respawn()
             self.outro_jogador.respawn()
 
     def respawn(self):
-        self.hitbox_rect.x = 100  # 445
-        self.hitbox_rect.y = 50
-
+        self.hitbox_rect.x = 300  # 445
+        self.hitbox_rect.y = 150
 
     def pressed_botao(self):
         if self.pressed_botao():
