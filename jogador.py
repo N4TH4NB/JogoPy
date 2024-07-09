@@ -113,8 +113,8 @@ class Jogador(pygame.sprite.Sprite):
             self.outro_jogador.respawn()
 
     def respawn(self):
-        self.hitbox_rect.x = 300  # 445
-        self.hitbox_rect.y = 150
+        self.hitbox_rect.x = 100  # 445
+        self.hitbox_rect.y = 50
 
     def pressed_botao(self):
         if self.pressed_botao():

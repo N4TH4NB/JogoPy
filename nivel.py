@@ -31,8 +31,6 @@ class Nivel:
         for x, y, surf in tmx_map.get_layer_by_name("Decoracao").tiles():
             Sprite((x * tamanho_bloco, y * tamanho_bloco), surf, (self.all_sprites, ))
 
-            #pygame.transform.scale_by(surf, 3)
-
         # objetos
         for obj in tmx_map.get_layer_by_name("Player"):
             if obj.name == "Passaro":
