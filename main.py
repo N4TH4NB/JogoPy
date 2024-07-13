@@ -53,7 +53,7 @@ class Game:
             self.current_stage.run(dt)
 
             # Atualizar a tela
-            print(f"fps: {pygame.time.Clock.get_fps(self.clock):.0f}")
+            # print(f"fps: {pygame.time.Clock.get_fps(self.clock):.0f}")
             pygame.display.update()
 
 

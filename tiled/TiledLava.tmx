@@ -1,23 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="35" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="13">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="35" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="29">
  <tileset firstgid="1" source="tsx/Lava_Ground.tsx"/>
  <tileset firstgid="106" source="tsx/flag.tsx"/>
  <tileset firstgid="115" source="tsx/sign.tsx"/>
+ <tileset firstgid="117" source="tsx/lava.tsx"/>
  <objectgroup id="2" name="Plataformas">
-  <object id="1" name="P" gid="25" x="195" y="149.75" width="16" height="16">
-   <properties>
-    <property name="Girar" type="bool" value="false"/>
-    <property name="Plataforma" type="bool" value="true"/>
-    <property name="Vel" type="int" value="50"/>
-   </properties>
-  </object>
-  <object id="2" name="P" gid="25" x="156.167" y="173.25" width="16" height="16">
-   <properties>
-    <property name="Girar" type="bool" value="false"/>
-    <property name="Plataforma" type="bool" value="true"/>
-    <property name="Vel" type="int" value="50"/>
-   </properties>
-  </object>
   <object id="5" name="Local" gid="27" x="47.8864" y="64.3409" width="16" height="42">
    <properties>
     <property name="Girar" type="bool" value="false"/>
@@ -33,7 +20,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="7" name="Bandeira">
+ <objectgroup id="7" name="ObjParado">
   <object id="12" name="bandeira" gid="106" x="512.333" y="97.4545" width="32" height="32">
    <properties>
     <property name="nivel" type="int" value="1"/>
@@ -41,10 +28,11 @@
     <property name="pos_y" type="int" value="110"/>
    </properties>
   </object>
+  <object id="27" name="danoparado" gid="3" x="154.25" y="80.5" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="3" name="Player">
-  <object id="3" name="Passaro" gid="5" x="88.6444" y="79" width="16" height="16"/>
-  <object id="7" name="Player2" gid="3" x="118.333" y="79.1666" width="16" height="16"/>
+  <object id="3" name="player1" gid="5" x="103.311" y="77" width="16" height="16"/>
+  <object id="7" name="player2" gid="3" x="122" y="75.5" width="16" height="16"/>
  </objectgroup>
  <layer id="1" name="Chao" width="35" height="32">
   <data encoding="csv">
@@ -82,6 +70,20 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="8" name="Dano">
+  <object id="15" name="danoreset" gid="3" x="272" y="129" width="16" height="16">
+   <properties>
+    <property name="direcao" value="x"/>
+    <property name="nome" value="fireball"/>
+   </properties>
+  </object>
+  <object id="18" name="danoreset" gid="3" x="272.667" y="107.333" width="16" height="16">
+   <properties>
+    <property name="direcao" value="y"/>
+    <property name="nome" value="fireball"/>
+   </properties>
+  </object>
+ </objectgroup>
  <layer id="4" name="Obstaculos" width="35" height="32">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -124,11 +126,11 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,106,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,116,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+117,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,118,0,0,0,119,0,0,0,120,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
