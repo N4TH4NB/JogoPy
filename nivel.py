@@ -9,6 +9,13 @@ from os.path import join
 
 class Nivel:
     def __init__(self, tmx_map, switch_stage):
+        self.hit = None
+        self.botao = None
+        self.pressed_botao = None
+        self.level_finish_rect = None
+        self.num_niveis = None
+        self.jogador2 = None
+        self.jogador = None
         self.switch_stage = switch_stage
         self.display_surface = pygame.display.get_surface()
         self.all_sprites = AllSprites()
