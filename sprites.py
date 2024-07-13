@@ -68,12 +68,12 @@ class Dano(Sprite):
 
     def check_borda(self):
         if self.direcao_movi == "x":
-            if self.tipo_dano == "reset":
+            if self.tipo_dano == "danoreset":
                 if self.rect.right >= self.pos_final[0] and self.direcao.x == 1:
                     self.rect.right = self.pos_inicial[0]
                 elif self.rect.right <= self.pos_inicial[0] and self.direcao.x == -1:
                     self.rect.right = self.pos_inicial[0]
-            elif self.tipo_dano == "continuo":
+            elif self.tipo_dano == "danocontinuo":
                 if self.rect.right >= self.pos_final[0] and self.direcao.x == 1:
                     self.direcao.x = -1
                     self.rect.right = self.pos_final[0]
@@ -84,12 +84,12 @@ class Dano(Sprite):
                     self.image = pygame.transform.flip(self.image, True, False)
 
         elif self.direcao_movi == "y":
-            if self.tipo_dano == "reset":
+            if self.tipo_dano == "danoreset":
                 if self.rect.top >= self.pos_final[1] and self.direcao.y == 1:
                     self.rect.top = self.pos_inicial[1]
                 elif self.rect.top <= self.pos_inicial[1] and self.direcao.y == -1:
                     self.rect.top = self.pos_inicial[1]
-            elif self.tipo_dano == "continuo":
+            elif self.tipo_dano == "danocontinuo":
                 if self.rect.top >= self.pos_final[1] and self.direcao.y == 1:
                     self.direcao.y = -1
                     self.rect.top = self.pos_final[1]

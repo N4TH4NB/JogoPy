@@ -102,11 +102,6 @@ class Jogador(pygame.sprite.Sprite):
         self.rect.center = self.hitbox_rect.center
         # print(self.direction.y)
 
-    def die(self):
-        if self.hitbox_rect.x > 1000 or self.hitbox_rect.y > 1000 or self.hitbox_rect.x < -5:
-            self.respawn()
-            self.outro_jogador.respawn()
-
     def respawn(self):
         self.hitbox_rect.x = 100  # 445
         self.hitbox_rect.y = 50
@@ -196,7 +191,6 @@ class Jogador(pygame.sprite.Sprite):
         self.move(dt)
         self.plataform_move(dt)
         self.check_contact()
-        self.die()
     #   print(self.timers["wall climb"].active)
 
     #   print(self.doublejump)
