@@ -36,12 +36,12 @@ class Nivel:
             Sprite((x * tamanho_bloco, y * tamanho_bloco), surf, (self.all_sprites, *groups))
 
     def criar_jogadores(self, tmx_map):
-        camada_jogador = tmx_map.get_layer_by_name("Player")
+        camada_jogador = tmx_map.get_layer_by_name("Jogador")
         for obj in camada_jogador:
-            if obj.name == "player1":
+            if obj.name == "jogador1":
                 self.jogador = self.criar_jogador(obj, obj.properties["Image"], pygame.K_d, pygame.K_a, pygame.K_s,
                                                   pygame.K_w)
-            elif obj.name == "player2":
+            elif obj.name == "jogador2":
                 self.jogador2 = self.criar_jogador(obj, obj.properties["Image"], pygame.K_RIGHT, pygame.K_LEFT,
                                                    pygame.K_DOWN, pygame.K_UP)
 
@@ -51,7 +51,7 @@ class Nivel:
                        right_key, left_key, down_key, up_key)
 
     def criar_objetos_estaticos(self, tmx_map):
-        for obj in tmx_map.get_layer_by_name("ObjParado"):
+        for obj in tmx_map.get_layer_by_name("ObjEstatico"):
             if obj.name == "bandeira":
                 self.num_niveis = obj.properties["nivel"]
                 image = obj.properties["Image"]

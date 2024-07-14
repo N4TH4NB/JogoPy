@@ -14,26 +14,35 @@ class Game:
 
         # Criação da janela de jogo
         self.surface = pygame.display.set_mode((largura, altura), pygame.SCALED | pygame.RESIZABLE)
-
         pygame.display.set_caption(titulo)  # Título do jogo
         self.clock = pygame.time.Clock()
-        self.background = pygame.image.load("tiled/png/mountains_b.png")
-        self.background = pygame.transform.scale(self.background, (largura, altura))
 
         self.num_nivel = 0
         # Carregar mapas
         self.tmx_maps = {
-            0: load_pygame(join("tiled/TiledLava.tmx")),
-            1: load_pygame(join("tiled/TiledForest.tmx")),
+            0: load_pygame(join("tiled/Fase1.tmx")),
+            1: load_pygame(join("tiled/TiledLava.tmx")),
             2: load_pygame(join("tiled/TiledSnow.tmx"))
-
         }
+        # Carregar imagens de fundo
+        self.background_images = {
+            0: pygame.image.load("tiled/png/trees.png"),
+            1: pygame.image.load("tiled/png/mountains_b.png"),
+            2: pygame.image.load("tiled/png/mountains_a.png")
+        }
+        # Escalar as imagens de fundo para o tamanho da janela
+        self.background_images = {i: pygame.transform.scale(j, (largura, altura)) for i, j in
+                                  self.background_images.items()}
+
+        # Configurar o primeiro estágio e o fundo
         self.current_stage = Nivel(self.tmx_maps[self.num_nivel], self.switch_stage)
+        self.background = self.background_images[self.num_nivel]
 
         self.tempo = time.time()
 
     def switch_stage(self, num_nivel):
         self.current_stage = Nivel(self.tmx_maps[num_nivel], self.switch_stage)
+        self.background = self.background_images[num_nivel]
 
     def run(self):
         while True:
@@ -45,11 +54,12 @@ class Game:
                     pygame.quit()
                     exit()
 
-            # Executar lógica do nível
+            # Desenhar o fundo apropriado
             self.surface.fill("#3a1e3d")
             self.surface.blit(self.background, (0, 0))
             self.current_stage.run(dt)
             pygame.display.flip()
+
 
 if __name__ == '__main__':
     jogo = Game()

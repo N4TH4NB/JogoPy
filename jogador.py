@@ -9,6 +9,7 @@ class Jogador(pygame.sprite.Sprite):
         super().__init__(groups)
         self.original_image = image
         self.image = image
+        self.spawn_pos = pos
         self.rect = self.image.get_frect(topleft=pos)
         self.hitbox_rect = self.rect.inflate(0, 0)
         self.old_rect = self.hitbox_rect.copy()
@@ -57,7 +58,7 @@ class Jogador(pygame.sprite.Sprite):
         self.collision("horizontal")
 
         if not self.on_ground["chao"] and (self.on_ground["left"] or self.on_ground["right"]) and not self.timers[
-            "wall climb"].active:
+                "wall climb"].active:
             if self.climb:
                 self.hitbox_rect.y -= 30 * dt
                 self.climb = False
@@ -84,8 +85,9 @@ class Jogador(pygame.sprite.Sprite):
         self.rect.center = self.hitbox_rect.center
 
     def respawn(self):
-        self.hitbox_rect.x = 100
-        self.hitbox_rect.y = 50
+        x, y = self.spawn_pos
+        self.hitbox_rect.x = x
+        self.hitbox_rect.y = y
 
     def plataform_move(self, dt):
         if self.plataforma:

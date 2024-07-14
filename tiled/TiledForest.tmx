@@ -47,7 +47,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="5" name="Bandeira">
+ <objectgroup id="5" name="ObjParado">
   <object id="7" name="bandeira" gid="73" x="323.5" y="52.5" width="32" height="32">
    <properties>
     <property name="nivel" type="int" value="2"/>
