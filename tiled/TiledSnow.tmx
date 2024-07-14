@@ -75,7 +75,11 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="3" name="Plataformas"/>
+ <objectgroup id="3" name="Plataformas">
+  <properties>
+   <property name="Image" value="tiled/png/plataforma_lava1"/>
+  </properties>
+ </objectgroup>
  <objectgroup id="4" name="Player">
   <object id="1" name="player1" gid="32" x="98" y="78.6667" width="16" height="16"/>
   <object id="2" name="player2" gid="32" x="131" y="78.3333" width="16" height="16"/>

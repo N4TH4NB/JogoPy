@@ -39,10 +39,10 @@ class Nivel:
         camada_jogador = tmx_map.get_layer_by_name("Player")
         for obj in camada_jogador:
             if obj.name == "player1":
-                self.jogador = self.criar_jogador(obj, "tiled/png/chickenc.png", pygame.K_d, pygame.K_a, pygame.K_s,
+                self.jogador = self.criar_jogador(obj, obj.properties["Image"], pygame.K_d, pygame.K_a, pygame.K_s,
                                                   pygame.K_w)
             elif obj.name == "player2":
-                self.jogador2 = self.criar_jogador(obj, "tiled/png/penguin.png", pygame.K_RIGHT, pygame.K_LEFT,
+                self.jogador2 = self.criar_jogador(obj, obj.properties["Image"], pygame.K_RIGHT, pygame.K_LEFT,
                                                    pygame.K_DOWN, pygame.K_UP)
 
     def criar_jogador(self, obj, image_path, right_key, left_key, down_key, up_key):
@@ -54,24 +54,23 @@ class Nivel:
         for obj in tmx_map.get_layer_by_name("ObjParado"):
             if obj.name == "bandeira":
                 self.num_niveis = obj.properties["nivel"]
-                self.level_finish_rect = Sprite((obj.x, obj.y), pygame.image.load(join("tiled/png/flag.png")),
-                                                self.all_sprites)
+                image = obj.properties["Image"]
+                image = pygame.image.load(join(image))
+                self.level_finish_rect = Sprite((obj.x, obj.y), image, self.all_sprites)
 
     def criar_sprites_dano(self, tmx_map):
         for obj in tmx_map.get_layer_by_name("Dano"):
-            nome = obj.properties["nome"]
-            surf = pygame.image.load(join("tiled/png/fireball.png")) if nome == "fireball" else None
-            if surf:
+            image = obj.properties["Image"]
+            image = pygame.image.load(join(image))
+            if image:
                 if obj.name in ["danoreset", "danocontinuo"]:
                     direcao_movi = obj.properties["direcao"]
                     vel = 30
                     pos_inicial, pos_final = self.get_posicao_dano(obj, direcao_movi)
-                    if direcao_movi == "y":
-                        surf = pygame.transform.rotate(surf, 270)
                     self.hit = Dano((self.all_sprites, self.dano_sprites), pos_inicial, pos_final, direcao_movi,
-                                    vel, surf, obj.name)
+                                    vel, image, obj.name)
                 elif obj.name == "danoparado":
-                    Sprite((obj.x, obj.y), surf, (self.all_sprites, self.dano_sprites))
+                    Sprite((obj.x, obj.y), image, (self.all_sprites, self.dano_sprites))
 
     def get_posicao_dano(self, obj, direcao_movi):
         if direcao_movi == "y":
@@ -86,7 +85,9 @@ class Nivel:
         for obj in tmx_map.get_layer_by_name("Plataformas"):
             direcao_movi, pos_inicial, pos_final = self.get_posicao_plataforma(obj)
             vel = obj.properties["Vel"]
-            PlataformaMovel((self.all_sprites, self.semi_collision_sprites), pos_inicial, pos_final, direcao_movi, vel)
+            image = obj.properties["Image"]
+            image = pygame.image.load(join(image))
+            PlataformaMovel((self.all_sprites, self.semi_collision_sprites), pos_inicial, pos_final, direcao_movi, vel, image)
 
     def get_posicao_plataforma(self, obj):
         if obj.width > obj.height:  # horizontal

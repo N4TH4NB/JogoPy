@@ -2,20 +2,17 @@ from config import *
 
 
 class Sprite(pygame.sprite.Sprite):
-    def __init__(self, pos, surf=pygame.Surface((tamanho_bloco, tamanho_bloco)), groups=None):
+    def __init__(self, pos, image=pygame.Surface((tamanho_bloco, tamanho_bloco)), groups=None):
         super().__init__(groups)
 
-        self.image = surf
+        self.image = image
         self.rect = self.image.get_frect(topleft=pos)
         self.old_rect = self.rect.copy()
 
 
 class PlataformaMovel(Sprite):
-    def __init__(self, groups, pos_inicial, pos_final, direcao_movi, vel):
-        surf = pygame.Surface((30, 10))
-
-        super().__init__(pos_inicial, surf, groups)
-
+    def __init__(self, groups, pos_inicial, pos_final, direcao_movi, vel, image):
+        super().__init__(pos_inicial, image, groups)
         self.rect.center = pos_inicial
         self.pos_inicial = pos_inicial
         self.pos_final = pos_final
@@ -27,7 +24,6 @@ class PlataformaMovel(Sprite):
         self.direcao_movi = direcao_movi
 
     def check_borda(self):
-
         # indo para a direita/horizontal
         if self.direcao_movi == "x":
             if self.rect.right >= self.pos_final[0] and self.direcao.x == 1:
@@ -36,7 +32,7 @@ class PlataformaMovel(Sprite):
             if self.rect.right <= self.pos_inicial[0] and self.direcao.x == -1:
                 self.direcao.x = 1
                 self.rect.right = self.pos_inicial[0]
-                # vertical
+        # vertical
         if self.direcao_movi == "y":
             if self.rect.top >= self.pos_final[1] and self.direcao.y == 1:
                 self.direcao.y = -1
@@ -47,7 +43,7 @@ class PlataformaMovel(Sprite):
 
     def update(self, dt):
         self.old_rect = self.rect.copy()
-        #self.image.fill("white")
+        # Atualize a posição da plataforma móvel
         self.rect.topleft += self.direcao * self.Vel * dt
         self.check_borda()
 
@@ -61,6 +57,7 @@ class Dano(Sprite):
         self.pos_final = pos_final
         self.vel = vel
         self.tipo_dano = tipo_dano
+        self.flipped = False
 
         # Definir a direção do movimento
         self.direcao = vector(1, 0) if direcao_movi == "x" else vector(0, 1)
@@ -85,6 +82,9 @@ class Dano(Sprite):
                     self.image = pygame.transform.flip(self.image, True, False)
 
         elif self.direcao_movi == "y":
+            if not self.flipped:
+                self.image = pygame.transform.rotate(self.image, 270)
+                self.flipped = True
             if self.tipo_dano == "danoreset":
                 if self.rect.top >= self.pos_final[1] and self.direcao.y == 1:
                     self.rect.top = self.pos_inicial[1]
