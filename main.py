@@ -17,15 +17,15 @@ class Game:
 
         pygame.display.set_caption(titulo)  # Título do jogo
         self.clock = pygame.time.Clock()
-        self.background = pygame.image.load("tiled\\png\\mountains_b.png")
+        self.background = pygame.image.load("tiled/png/mountains_b.png")
         self.background = pygame.transform.scale(self.background, (largura, altura))
 
         self.num_nivel = 0
         # Carregar mapas
         self.tmx_maps = {
-            0: load_pygame(join("tiled\\TiledLava.tmx")),
-            1: load_pygame(join("tiled\\TiledForest.tmx")),
-            2: load_pygame(join("tiled\\TiledSnow.tmx"))
+            0: load_pygame(join("tiled/TiledLava.tmx")),
+            1: load_pygame(join("tiled/TiledForest.tmx")),
+            2: load_pygame(join("tiled/TiledSnow.tmx"))
 
         }
         self.current_stage = Nivel(self.tmx_maps[self.num_nivel], self.switch_stage)
@@ -38,7 +38,7 @@ class Game:
 
     def run(self):
         while True:
-            self.clock.tick(FPS)
+            #self.clock.tick(FPS)
             dt = time.time() - self.tempo
             self.tempo = time.time()
             for event in pygame.event.get():
@@ -52,7 +52,7 @@ class Game:
             self.current_stage.run(dt)
 
             # Atualizar a tela
-            # print(f"fps: {pygame.time.Clock.get_fps(self.clock):.0f}")
+            #print(f"fps: {pygame.time.Clock.get_fps(self.clock):.0f}")
             pygame.display.flip()
 
 if __name__ == '__main__':
