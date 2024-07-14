@@ -29,7 +29,6 @@ class Nivel:
         self.criar_sprites_camadas(tmx_map, "Decoracao")
         self.criar_jogadores(tmx_map)
         self.criar_objetos_estaticos(tmx_map)
-        self.criar_obstaculo(tmx_map)
         self.criar_sprites_dano(tmx_map)
         self.criar_plataforma(tmx_map)
 
@@ -47,8 +46,6 @@ class Nivel:
                 self.jogador2 = self.criar_jogador(obj, "tiled\\png\\penguin.png", pygame.K_RIGHT, pygame.K_LEFT,
                                                    pygame.K_DOWN, pygame.K_UP)
 
-        self.jogador.outro_jogador = self.jogador2
-        self.jogador2.outro_jogador = self.jogador
 
     def criar_jogador(self, obj, image_path, right_key, left_key, down_key, up_key):
         return Jogador(pygame.image.load(join(image_path)), (obj.x, obj.y),
@@ -62,19 +59,11 @@ class Nivel:
                 self.level_finish_rect = Sprite((obj.x, obj.y), pygame.image.load(join("tiled\\png\\flag.png")),
                                                 self.all_sprites)
 
-    def criar_obstaculo(self, tmx_map):
-        obstacle_layer = tmx_map.get_layer_by_name("Obstaculo")
-        if obstacle_layer:
-            for obj in obstacle_layer:
-                if obj.name == "botao":
-                    self.pressed_botao = obj.properties["pressed_botao"]
-                    self.botao = pygame.FRect((obj.x, obj.y), (obj.width, obj.height))
 
     def criar_sprites_dano(self, tmx_map):
         for obj in tmx_map.get_layer_by_name("Dano"):
             nome = obj.properties["nome"]
             surf = pygame.image.load(join("tiled\\png\\fireball.png")) if nome == "fireball" else None
-
             if surf:
                 if obj.name in ["danoreset", "danocontinuo"]:
                     direcao_movi = obj.properties["direcao"]
@@ -119,12 +108,10 @@ class Nivel:
             self.switch_stage(num_nivel)
 
     def morrer(self):
-        fora_mapa_jogador = self.jogador.hitbox_rect.x > 1000 or self.jogador.hitbox_rect.y > 1000 or self.jogador.hitbox_rect.x < -5
-        fora_mapa_jogador2 = self.jogador2.hitbox_rect.x > 1000 or self.jogador2.hitbox_rect.y > 1000 or self.jogador2.hitbox_rect.x < -5
         for sprite in self.dano_sprites:
             colisao_dano = sprite.rect.colliderect(self.jogador2.hitbox_rect) or sprite.rect.colliderect(
                 self.jogador.hitbox_rect)
-            if colisao_dano or fora_mapa_jogador or fora_mapa_jogador2:
+            if colisao_dano or self.jogador.hitbox_rect.y > 1000 or self.jogador2.hitbox_rect.y > 1000:
                 self.jogador2.respawn()
                 self.jogador.respawn()
 

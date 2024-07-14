@@ -47,7 +47,7 @@ class PlataformaMovel(Sprite):
 
     def update(self, dt):
         self.old_rect = self.rect.copy()
-        self.image.fill("white")
+        #self.image.fill("white")
         self.rect.topleft += self.direcao * self.Vel * dt
         self.check_borda()
 
@@ -73,6 +73,7 @@ class Dano(Sprite):
                     self.rect.right = self.pos_inicial[0]
                 elif self.rect.right <= self.pos_inicial[0] and self.direcao.x == -1:
                     self.rect.right = self.pos_inicial[0]
+
             elif self.tipo_dano == "danocontinuo":
                 if self.rect.right >= self.pos_final[0] and self.direcao.x == 1:
                     self.direcao.x = -1
@@ -89,6 +90,7 @@ class Dano(Sprite):
                     self.rect.top = self.pos_inicial[1]
                 elif self.rect.top <= self.pos_inicial[1] and self.direcao.y == -1:
                     self.rect.top = self.pos_inicial[1]
+
             elif self.tipo_dano == "danocontinuo":
                 if self.rect.top >= self.pos_final[1] and self.direcao.y == 1:
                     self.direcao.y = -1
