@@ -45,7 +45,6 @@ class Nivel:
                 self.jogador2 = self.criar_jogador(obj, "tiled/png/penguin.png", pygame.K_RIGHT, pygame.K_LEFT,
                                                    pygame.K_DOWN, pygame.K_UP)
 
-
     def criar_jogador(self, obj, image_path, right_key, left_key, down_key, up_key):
         return Jogador(pygame.image.load(join(image_path)), (obj.x, obj.y),
                        (self.all_sprites,), self.collision_sprites, self.semi_collision_sprites,
@@ -57,7 +56,6 @@ class Nivel:
                 self.num_niveis = obj.properties["nivel"]
                 self.level_finish_rect = Sprite((obj.x, obj.y), pygame.image.load(join("tiled/png/flag.png")),
                                                 self.all_sprites)
-
 
     def criar_sprites_dano(self, tmx_map):
         for obj in tmx_map.get_layer_by_name("Dano"):

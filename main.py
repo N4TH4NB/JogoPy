@@ -33,12 +33,11 @@ class Game:
         self.tempo = time.time()
 
     def switch_stage(self, num_nivel):
-        #  print(num_nivel)
         self.current_stage = Nivel(self.tmx_maps[num_nivel], self.switch_stage)
 
     def run(self):
         while True:
-            #self.clock.tick(FPS)
+            self.clock.tick(FPS)
             dt = time.time() - self.tempo
             self.tempo = time.time()
             for event in pygame.event.get():
@@ -50,9 +49,6 @@ class Game:
             self.surface.fill("#3a1e3d")
             self.surface.blit(self.background, (0, 0))
             self.current_stage.run(dt)
-
-            # Atualizar a tela
-            #print(f"fps: {pygame.time.Clock.get_fps(self.clock):.0f}")
             pygame.display.flip()
 
 if __name__ == '__main__':
