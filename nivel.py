@@ -17,7 +17,6 @@ class Nivel:
         self.jogador2 = None
         self.jogador = None
         self.switch_stage = switch_stage
-        self.display_surface = pygame.display.get_surface()
         self.all_sprites = AllSprites()
         self.collision_sprites = pygame.sprite.Group()
         self.semi_collision_sprites = pygame.sprite.Group()
@@ -116,7 +115,6 @@ class Nivel:
                 self.jogador.respawn()
 
     def run(self, dt):
-        self.display_surface.fill("#393457")
         self.all_sprites.update(dt)
         x = (self.jogador.hitbox_rect.x + self.jogador2.hitbox_rect.x) / 2
         y = (self.jogador.hitbox_rect.y + self.jogador2.hitbox_rect.y) / 2

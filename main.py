@@ -17,6 +17,8 @@ class Game:
 
         pygame.display.set_caption(titulo)  # Título do jogo
         self.clock = pygame.time.Clock()
+        self.background = pygame.image.load("tiled\\png\\mountains_b.png")
+        self.background = pygame.transform.scale(self.background, (largura, altura))
 
         self.num_nivel = 0
         # Carregar mapas
@@ -45,6 +47,8 @@ class Game:
                     exit()
 
             # Executar lógica do nível
+            self.surface.fill("#3a1e3d")
+            self.surface.blit(self.background, (0, 0))
             self.current_stage.run(dt)
 
             # Atualizar a tela
