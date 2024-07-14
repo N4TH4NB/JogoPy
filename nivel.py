@@ -24,12 +24,12 @@ class Nivel:
         self.setup(tmx_map)
 
     def setup(self, tmx_map):
-        self.criar_sprites_camadas(tmx_map, "Chao", self.collision_sprites)
-        self.criar_sprites_camadas(tmx_map, "Decoracao")
-        self.criar_jogadores(tmx_map)
         self.criar_objetos_estaticos(tmx_map)
         self.criar_sprites_dano(tmx_map)
         self.criar_plataforma(tmx_map)
+        self.criar_sprites_camadas(tmx_map, "Chao", self.collision_sprites)
+        self.criar_sprites_camadas(tmx_map, "Decoracao")
+        self.criar_jogadores(tmx_map)
 
     def criar_sprites_camadas(self, tmx_map, layer_name, *groups):
         for x, y, surf in tmx_map.get_layer_by_name(layer_name).tiles():
@@ -107,9 +107,9 @@ class Nivel:
 
     def morrer(self):
         for sprite in self.dano_sprites:
-            colisao_dano = sprite.rect.colliderect(self.jogador2.hitbox_rect) or sprite.rect.colliderect(
-                self.jogador.hitbox_rect)
-            if colisao_dano or self.jogador.hitbox_rect.y > 1000 or self.jogador2.hitbox_rect.y > 1000:
+            colisao_dano = sprite.rect.colliderect(self.jogador2.hitbox_rect.inflate(-10, -10)) or sprite.rect.colliderect(
+                self.jogador.hitbox_rect.inflate(-10, -10))
+            if colisao_dano or self.jogador.hitbox_rect.y > 700 or self.jogador2.hitbox_rect.y > 700:
                 self.jogador2.respawn()
                 self.jogador.respawn()
 

@@ -18,7 +18,7 @@ class Jogador(pygame.sprite.Sprite):
         self.gravity = 20
         self.jump = False
         self.climb = False
-        self.jump_height = -4.5
+        self.jump_height = -5
         self.collision_sprites = collision_sprites
         self.semi_collision_sprites = semi_collision_sprites
         self.on_ground = {"chao": False, "left": False, "right": False}
