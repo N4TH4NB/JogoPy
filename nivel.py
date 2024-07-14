@@ -116,7 +116,7 @@ class Nivel:
                 self.jogador.respawn()
 
     def run(self, dt):
-        self.display_surface.fill("#72647d")
+        self.display_surface.fill("#393457")
         self.all_sprites.update(dt)
         x = (self.jogador.hitbox_rect.x + self.jogador2.hitbox_rect.x) / 2
         y = (self.jogador.hitbox_rect.y + self.jogador2.hitbox_rect.y) / 2

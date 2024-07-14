@@ -1,7 +1,7 @@
+import time
 from os.path import join
 from sys import exit
 
-import time
 from pytmx.util_pygame import load_pygame
 
 from config import *
@@ -13,12 +13,7 @@ class Game:
         pygame.init()
 
         # Criação da janela de jogo
-        self.surface = pygame.display.set_mode((largura, altura), pygame.SCALED | pygame.HIDDEN)
-
-        janela = pygame.Window.from_display_module()
-        janela.size = (largura_janela, altura_janela)
-        janela.position = pygame.WINDOWPOS_CENTERED
-        janela.show()
+        self.surface = pygame.display.set_mode((largura, altura), pygame.SCALED | pygame.RESIZABLE)
 
         pygame.display.set_caption(titulo)  # Título do jogo
         self.clock = pygame.time.Clock()
@@ -54,8 +49,7 @@ class Game:
 
             # Atualizar a tela
             # print(f"fps: {pygame.time.Clock.get_fps(self.clock):.0f}")
-            pygame.display.update()
-
+            pygame.display.flip()
 
 if __name__ == '__main__':
     jogo = Game()
