@@ -51,6 +51,7 @@ class Game:
         if num_nivel == 3:
             exit()
         else:
+            self.num_nivel = num_nivel
             self.current_stage = Nivel(self.tmx_maps[num_nivel], self.switch_stage)
             self.background = self.background_images[num_nivel]
 
@@ -72,6 +73,7 @@ class Game:
             self.surface.blit(self.background, (0, 0))  # Desenha a imagem de fundo
             self.current_stage.run(dt)  # Atualiza o estágio atual
             pygame.display.flip()  # Atualiza a tela
+
 
 if __name__ == '__main__':
     jogo = Game()  # Cria uma instância do jogo
