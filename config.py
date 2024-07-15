@@ -8,4 +8,3 @@ FPS = 0
 FPS_Fisica = 60
 titulo = "Joguinho"
 tamanho_bloco = 16
-# Z_LAYERS = {"chao_tl": 0}
