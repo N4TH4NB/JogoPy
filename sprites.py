@@ -82,12 +82,22 @@ class Dano(Sprite):
                     self.image = pygame.transform.flip(self.image, True, False)
 
         elif self.direcao_movi == "y" or "-y":
-            if not self.flipped and self.direcao_movi == "y":
-                self.image = pygame.transform.rotate(self.image, 270)
+
+            if self.tipo_dano == "danocontinuo":
+                if self.rect.top >= self.pos_final[1] and self.direcao.y == 1:
+                    self.direcao.y = -1
+                    self.rect.top = self.pos_final[1]
+                elif self.rect.top <= self.pos_inicial[1] and self.direcao.y == -1:
+                    self.direcao.y = 1
+                    self.rect.top = self.pos_inicial[1]
                 self.flipped = True
 
-            if self.direcao_movi == "-y" and not self.flipped:
-                self.image = pygame.transform.rotate(self.image, 90)
+            if not self.flipped and self.direcao_movi == "y":
+                #self.image = pygame.transform.rotate(self.image, 270)
+                self.flipped = True
+
+            if not self.flipped and not self.direcao_movi == "y":
+                #self.image = pygame.transform.rotate(self.image, 90)
                 self.direcao.y = -1
                 self.flipped = True
 
@@ -97,15 +107,7 @@ class Dano(Sprite):
                 elif self.rect.top <= self.pos_final[1] and self.direcao.y == -1:
                     self.rect.top = self.pos_inicial[1]
 
-            elif self.tipo_dano == "danocontinuo":
-                if self.rect.top >= self.pos_final[1] and self.direcao.y == 1:
-                    self.direcao.y = -1
-                    self.rect.top = self.pos_final[1]
-                    self.image = pygame.transform.flip(self.image, False, True)
-                elif self.rect.top <= self.pos_inicial[1] and self.direcao.y == -1:
-                    self.direcao.y = 1
-                    self.rect.top = self.pos_inicial[1]
-                    self.image = pygame.transform.flip(self.image, False, True)
+
 
     def update(self, dt):
         self.old_rect = self.rect.copy()

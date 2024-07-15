@@ -20,19 +20,25 @@ class Game:
         self.num_nivel = 0
         # Carregar mapas
         self.tmx_maps = {
-            2: load_pygame(join("tiled/Fase1.tmx")),
-            1: load_pygame(join("tiled/TiledLava.tmx")),
-            0: load_pygame(join("tiled/Fase3.tmx"))
+            1: load_pygame(join("tiled/Fase1.tmx")),
+            0: load_pygame(join("tiled/Fase2.tmx")),
+            2: load_pygame(join("tiled/Fase3.tmx"))
         }
         # Carregar imagens de fundo
         self.background_images = {
-            0: pygame.image.load("tiled/png/trees.png"),
-            1: pygame.image.load("tiled/png/mountains_b.png"),
-            2: pygame.image.load("tiled/png/mountains_a.png")
+            1: pygame.image.load("tiled/png/trees.png"),
+            0: pygame.image.load("tiled/png/mountains_a.png"),
+            2: pygame.image.load("tiled/png/mountains_b.png")
         }
         # Escalar as imagens de fundo para o tamanho da janela
         self.background_images = {i: pygame.transform.scale(j, (largura, altura)) for i, j in
                                   self.background_images.items()}
+
+        self.background_color = {
+            0: "#76CED9",
+            1: "#CAE4E7",
+            2: "#3A1E3D"
+        }
 
         # Configurar o primeiro estágio e o fundo
         self.current_stage = Nivel(self.tmx_maps[self.num_nivel], self.switch_stage)
@@ -46,7 +52,7 @@ class Game:
 
     def run(self):
         while True:
-            self.clock.tick(FPS)
+            #self.clock.tick(FPS)
             dt = time.time() - self.tempo
             self.tempo = time.time()
             for event in pygame.event.get():
@@ -55,7 +61,7 @@ class Game:
                     exit()
 
             # Desenhar o fundo apropriado
-            self.surface.fill("#3a1e3d")
+            self.surface.fill(self.background_color[self.num_nivel])
             self.surface.blit(self.background, (0, 0))
             self.current_stage.run(dt)
             pygame.display.flip()
