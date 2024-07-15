@@ -105,7 +105,7 @@
   <object id="20" name="local" gid="65" x="598.333" y="560" width="17.3333" height="46.6667">
    <properties>
     <property name="Image" value="tiled/png/plataforma_lava1.png"/>
-    <property name="Vel" type="int" value="30"/>
+    <property name="Vel" type="int" value="35"/>
    </properties>
   </object>
  </objectgroup>
