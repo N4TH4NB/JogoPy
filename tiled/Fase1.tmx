@@ -82,7 +82,7 @@
   <object id="14" name="bandeira" gid="120" x="1170" y="175.5" width="32" height="32">
    <properties>
     <property name="Image" value="tiled/png/flag.png"/>
-    <property name="nivel" type="int" value="1"/>
+    <property name="nivel" type="int" value="2"/>
    </properties>
   </object>
  </objectgroup>
@@ -109,12 +109,12 @@
   </object>
  </objectgroup>
  <objectgroup id="4" name="Jogador">
-  <object id="15" name="jogador1" gid="123" x="1221" y="176.5" width="17" height="16">
+  <object id="15" name="jogador1" gid="123" x="111.5" y="528" width="17" height="16">
    <properties>
     <property name="Image" value="tiled/png/chickenc_right.png"/>
    </properties>
   </object>
-  <object id="16" name="jogador2" gid="121" x="1193.5" y="176.5" width="17" height="16">
+  <object id="16" name="jogador2" gid="121" x="84" y="528" width="17" height="16">
    <properties>
     <property name="Image" value="tiled/png/penguin.png"/>
    </properties>
