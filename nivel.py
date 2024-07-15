@@ -73,11 +73,10 @@ class Nivel:
                     Sprite((obj.x, obj.y), image, (self.all_sprites, self.dano_sprites))
 
     def get_posicao_dano(self, obj, direcao_movi):
+        pos_inicial = (obj.x, obj.y)
         if direcao_movi == "y":
-            pos_inicial = (obj.x, obj.y)
-            pos_final = (obj.x, obj.y + 100)
+            pos_final = (obj.x, obj.y - 100)
         else:
-            pos_inicial = (obj.x, obj.y)
             pos_final = (obj.x + 50, obj.y)
         return pos_inicial, pos_final
 

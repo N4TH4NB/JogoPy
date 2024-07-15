@@ -22,7 +22,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="7" name="ObjParado">
+ <objectgroup id="7" name="ObjEstatico">
   <object id="12" name="bandeira" gid="106" x="512.333" y="97.4545" width="32" height="32">
    <properties>
     <property name="Image" value="tiled/png/flag.png"/>
@@ -33,13 +33,13 @@
   </object>
   <object id="27" name="danoparado" gid="3" x="154.25" y="80.5" width="16" height="16"/>
  </objectgroup>
- <objectgroup id="3" name="Player">
-  <object id="3" name="player1" gid="5" x="103.311" y="77" width="16" height="16">
+ <objectgroup id="3" name="Jogador">
+  <object id="3" name="jogador1" gid="5" x="103.311" y="77" width="16" height="16">
    <properties>
     <property name="Image" value="tiled/png/chickenc.png"/>
    </properties>
   </object>
-  <object id="7" name="player2" gid="3" x="122" y="75.5" width="16" height="16">
+  <object id="7" name="jogador2" gid="3" x="122" y="75.5" width="16" height="16">
    <properties>
     <property name="Image" value="tiled/png/penguin.png"/>
    </properties>
@@ -86,7 +86,6 @@
    <properties>
     <property name="Image" value="tiled/png/fireball.png"/>
     <property name="direcao" value="x"/>
-    <property name="nome" value="fireball"/>
    </properties>
   </object>
   <object id="18" name="danoreset" gid="3" x="272.667" y="107.333" width="16" height="16">

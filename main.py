@@ -20,9 +20,9 @@ class Game:
         self.num_nivel = 0
         # Carregar mapas
         self.tmx_maps = {
-            0: load_pygame(join("tiled/Fase1.tmx")),
+            2: load_pygame(join("tiled/Fase1.tmx")),
             1: load_pygame(join("tiled/TiledLava.tmx")),
-            2: load_pygame(join("tiled/TiledSnow.tmx"))
+            0: load_pygame(join("tiled/Fase3.tmx"))
         }
         # Carregar imagens de fundo
         self.background_images = {
