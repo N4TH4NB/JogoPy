@@ -8,9 +8,9 @@
  <tileset firstgid="76" source="tsx/arbusto.tsx"/>
  <tileset firstgid="78" source="tsx/agua.tsx"/>
  <tileset firstgid="110" source="tsx/pinheiro.tsx"/>
- <tileset firstgid="119" source="tsx/flag.tsx"/>
- <tileset firstgid="128" source="tsx/Jogador.tsx"/>
- <tileset firstgid="131" source="tsx/ursopardo.tsx"/>
+ <tileset firstgid="120" source="tsx/flag.tsx"/>
+ <tileset firstgid="121" source="tsx/Jogador.tsx"/>
+ <tileset firstgid="124" source="tsx/ursopardo.tsx"/>
  <layer id="1" name="Chao" width="100" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -71,7 +71,7 @@
     <property name="Image" value="tiled/png/wood_stakes.png"/>
    </properties>
   </object>
-  <object id="17" name="danocontinuo" gid="131" x="1018.5" y="344" width="32" height="32">
+  <object id="17" name="danocontinuo" gid="124" x="1018.5" y="344" width="32" height="32">
    <properties>
     <property name="Image" value="tiled/png/ursopardo.png"/>
     <property name="direcao" value="x"/>
@@ -79,7 +79,7 @@
   </object>
  </objectgroup>
  <objectgroup id="5" name="ObjEstatico">
-  <object id="14" name="bandeira" gid="119" x="1170" y="175.5" width="32" height="32">
+  <object id="14" name="bandeira" gid="120" x="1170" y="175.5" width="32" height="32">
    <properties>
     <property name="Image" value="tiled/png/flag.png"/>
     <property name="nivel" type="int" value="2"/>
@@ -109,12 +109,12 @@
   </object>
  </objectgroup>
  <objectgroup id="4" name="Jogador">
-  <object id="15" name="jogador1" gid="130" x="111.5" y="527" width="17" height="16">
+  <object id="15" name="jogador1" gid="123" x="111.5" y="528" width="17" height="16">
    <properties>
     <property name="Image" value="tiled/png/chickenc_right.png"/>
    </properties>
   </object>
-  <object id="16" name="jogador2" gid="128" x="84" y="527" width="17" height="16">
+  <object id="16" name="jogador2" gid="121" x="84" y="528" width="17" height="16">
    <properties>
     <property name="Image" value="tiled/png/penguin.png"/>
    </properties>

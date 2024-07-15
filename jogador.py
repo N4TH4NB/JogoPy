@@ -1,64 +1,59 @@
-from config import *
-from timer import Timer
+from config import *  # Importa todas as configurações do arquivo config
+from timer import Timer  # Importa a classe Timer
 import pygame
 
-
 class Jogador(pygame.sprite.Sprite):
-    def __init__(self, image, pos, groups, collision_sprites, semi_collision_sprites, right_key, left_key, down_key,
-                 jump_key):
-        super().__init__(groups)
-        self.original_image = image
-        self.image = image
-        self.spawn_pos = pos
-        self.rect = self.image.get_frect(topleft=pos)
-        self.hitbox_rect = self.rect.inflate(0, 0)
-        self.old_rect = self.hitbox_rect.copy()
-        self.direction = vector()
-        self.speed = 150
-        self.gravity = 20
-        self.jump = False
-        self.climb = False
-        self.jump_height = -5
-        self.collision_sprites = collision_sprites
-        self.semi_collision_sprites = semi_collision_sprites
-        self.on_ground = {"chao": False, "left": False, "right": False}
-        self.plataforma = None
+    def __init__(self, image, pos, groups, collision_sprites, semi_collision_sprites, right_key, left_key, down_key, jump_key):
+        super().__init__(groups)  # Inicializa a classe base pygame.sprite.Sprite
+        self.original_image = image  # Guarda a imagem original do jogador
+        self.image = image  # Define a imagem atual do jogador
+        self.spawn_pos = pos  # Guarda a posição inicial de spawn do jogador
+        self.rect = self.image.get_frect(topleft=pos)  # Cria um retângulo de colisão para o jogador
+        self.hitbox_rect = self.rect.inflate(0, 0)  # Cria um retângulo de hitbox para o jogador
+        self.old_rect = self.hitbox_rect.copy()  # Guarda a antiga posição da hitbox do jogador
+        self.direction = vector()  # Vetor de direção do jogador
+        self.speed = 150  # Velocidade de movimento do jogador
+        self.gravity = 20  # Força da gravidade que afeta o jogador
+        self.jump = False  # Indicador de pulo
+        self.climb = False  # Indicador de escalada
+        self.jump_height = -5  # Altura do pulo
+        self.collision_sprites = collision_sprites  # Grupo de sprites de colisão
+        self.semi_collision_sprites = semi_collision_sprites  # Grupo de sprites de semi-colisão
+        self.on_ground = {"chao": False, "left": False, "right": False}  # Indicadores de contato com o chão e paredes
+        self.plataforma = None  # Plataforma atual em que o jogador está
         self.timers = {
-            "wall jump": Timer(15),
-            "wall climb": Timer(100),
-            "plataforma fall": Timer(250)
+            "wall jump": Timer(15),  # Timer para pulo na parede
+            "wall climb": Timer(100),  # Timer para escalada na parede
+            "plataforma fall": Timer(250)  # Timer para queda da plataforma
         }
-        self.right_key = right_key
-        self.left_key = left_key
-        self.down_key = down_key
-        self.jump_key = jump_key
+        self.right_key = right_key  # Tecla para mover para a direita
+        self.left_key = left_key  # Tecla para mover para a esquerda
+        self.down_key = down_key  # Tecla para descer
+        self.jump_key = jump_key  # Tecla para pular
 
     def input(self):
-        keys = pygame.key.get_pressed()
-        key = pygame.key.get_just_pressed()
-        input_vector = vector(0, 0)
-        if not self.timers["wall jump"].active:
-            if keys[self.right_key]:
+        keys = pygame.key.get_pressed()  # Obtém o estado de todas as teclas pressionadas
+        input_vector = vector(0, 0)  # Vetor de entrada para movimento
+        if not self.timers["wall jump"].active:  # Se o timer de pulo na parede não está ativo
+            if keys[self.right_key]:  # Se a tecla para mover para a direita está pressionada
                 input_vector.x += 1
                 self.image = self.original_image
-            if keys[self.left_key]:
+            if keys[self.left_key]:  # Se a tecla para mover para a esquerda está pressionada
                 input_vector.x -= 1
                 self.image = pygame.transform.flip(self.original_image, True, False)
-            if keys[self.down_key]:
+            if keys[self.down_key]:  # Se a tecla para descer está pressionada
                 self.timers["plataforma fall"].activate()
             self.direction.x = input_vector.normalize().x if input_vector else input_vector.x
 
-        if key[self.jump_key]:
+        if keys[self.jump_key]:  # Se a tecla para pular está pressionada continuamente
             self.jump = True
-        if keys[self.jump_key]:
             self.climb = True
 
     def move(self, dt):
-        self.hitbox_rect.x += self.direction.x * self.speed * dt
-        self.collision("horizontal")
+        self.hitbox_rect.x += self.direction.x * self.speed * dt  # Move o jogador horizontalmente
+        self.collision("horizontal")  # Checa colisão horizontal
 
-        if not self.on_ground["chao"] and (self.on_ground["left"] or self.on_ground["right"]) and not self.timers[
-                "wall climb"].active:
+        if not self.on_ground["chao"] and (self.on_ground["left"] or self.on_ground["right"]) and not self.timers["wall climb"].active:
             if self.climb:
                 self.hitbox_rect.y -= 30 * dt
                 self.climb = False
@@ -91,14 +86,12 @@ class Jogador(pygame.sprite.Sprite):
 
     def plataform_move(self, dt):
         if self.plataforma:
-            self.hitbox_rect.topleft += self.plataforma.direcao * self.plataforma.Vel * dt
+            self.hitbox_rect.topleft += self.plataforma.direcao * self.plataforma.vel * dt
 
     def check_contact(self):
         chao_rect = pygame.Rect(self.hitbox_rect.bottomleft, (self.hitbox_rect.width, 2))
-        left_rect = pygame.Rect((self.hitbox_rect.topleft + vector(-2, self.hitbox_rect.height / 4)),
-                                (1, self.hitbox_rect.width / 2))
-        right_rect = pygame.Rect((self.hitbox_rect.topright + vector(0, self.hitbox_rect.height / 4)),
-                                 (1, self.hitbox_rect.width / 2))
+        left_rect = pygame.Rect((self.hitbox_rect.topleft + vector(-2, self.hitbox_rect.height / 4)), (1, self.hitbox_rect.width / 2))
+        right_rect = pygame.Rect((self.hitbox_rect.topright + vector(0, self.hitbox_rect.height / 4)), (1, self.hitbox_rect.width / 2))
         collide_rects = [sprite.rect for sprite in self.collision_sprites]
         semi_collide_rect = [sprite.rect for sprite in self.semi_collision_sprites]
 
