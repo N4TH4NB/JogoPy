@@ -9,7 +9,6 @@ from os.path import join  # Importa a função join para manipulação de caminh
 class Nivel:
     def __init__(self, tmx_map, switch_stage):
         # Inicializa os atributos da classe
-        self.hit = None
         self.level_finish_rect = None
         self.num_niveis = None
         self.jogador2 = None
@@ -73,7 +72,7 @@ class Nivel:
                     direcao_movi = obj.properties["direcao"]
                     vel = 30
                     pos_inicial, pos_final = self.get_posicao_dano(obj, direcao_movi)
-                    self.hit = Dano((self.all_sprites, self.dano_sprites), pos_inicial, pos_final, direcao_movi, vel,
+                    Dano((self.all_sprites, self.dano_sprites), pos_inicial, pos_final, direcao_movi, vel,
                                     image, obj.name)
                 elif obj.name == "danoparado":
                     Sprite((obj.x, obj.y), image, (self.all_sprites, self.dano_sprites))
