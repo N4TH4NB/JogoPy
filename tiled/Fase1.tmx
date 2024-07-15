@@ -82,7 +82,7 @@
   <object id="14" name="bandeira" gid="120" x="1170" y="175.5" width="32" height="32">
    <properties>
     <property name="Image" value="tiled/png/flag.png"/>
-    <property name="nivel" type="int" value="2"/>
+    <property name="nivel" type="int" value="1"/>
    </properties>
   </object>
  </objectgroup>
