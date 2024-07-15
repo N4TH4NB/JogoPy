@@ -109,12 +109,12 @@
   </object>
  </objectgroup>
  <objectgroup id="4" name="Jogador">
-  <object id="15" name="jogador1" gid="130" x="921" y="311" width="17" height="16">
+  <object id="15" name="jogador1" gid="130" x="111.5" y="527" width="17" height="16">
    <properties>
     <property name="Image" value="tiled/png/chickenc_right.png"/>
    </properties>
   </object>
-  <object id="16" name="jogador2" gid="128" x="897.5" y="317" width="17" height="16">
+  <object id="16" name="jogador2" gid="128" x="84" y="527" width="17" height="16">
    <properties>
     <property name="Image" value="tiled/png/penguin.png"/>
    </properties>

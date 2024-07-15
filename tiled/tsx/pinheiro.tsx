@@ -15,6 +15,9 @@
  </tile>
  <tile id="4">
   <image source="../png/bush.png" width="32" height="16"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="5" y="2" width="22" height="14"/>
+  </objectgroup>
  </tile>
  <tile id="5">
   <image source="../png/rock.png" width="16" height="16"/>
@@ -24,6 +27,10 @@
  </tile>
  <tile id="7" x="0" y="12" width="32" height="20">
   <image source="../png/wood_stakes.png" width="32" height="32"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="32" height="20"/>
+   <object id="2" x="0" y="0" width="32" height="20"/>
+  </objectgroup>
  </tile>
  <tile id="8">
   <image source="../png/sign_arrow_left.png" width="16" height="16"/>
