@@ -1,5 +1,6 @@
 #  Configurações do jogo.
-import pygame, sys
+import pygame
+import sys
 from pygame.math import Vector2 as vector
 
 largura = 320  # 640 400 1280 320
