@@ -75,6 +75,8 @@ class Nivel:
     def get_posicao_dano(self, obj, direcao_movi):
         pos_inicial = (obj.x, obj.y)
         if direcao_movi == "y":
+            pos_final = (obj.x, obj.y + 100)
+        elif direcao_movi == "-y":
             pos_final = (obj.x, obj.y - 100)
         else:
             pos_final = (obj.x + 50, obj.y)
